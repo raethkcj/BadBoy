@@ -275,7 +275,7 @@ do
 					BADBOY_BLACKLIST[k] = true
 					local reportInfo = ReportInfo:CreateReportInfoFromType(Enum.ReportType.Chat)
 					reportInfo:SetReportMajorCategory(Enum.ReportMajorCategory.InappropriateCommunication)
-					reportInfo:SetComment("Spammer blocked by BadBoy")
+					reportInfo:SetComment("Advertising loot or boosting outside of Trade chat")
 
 					ReportFrame:SetMajorType(Enum.ReportMajorCategory.InappropriateCommunication);
 					ReportFrame:SetMinorCategoryFlag(Enum.ReportMinorCategory.Spam, true);

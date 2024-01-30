@@ -32,28 +32,34 @@ t.gnt = function(u, ...)
 	t.gnt = nil
 end
 
+t[7] = {}
+
 local scores = {
 	10,
 	10,
 	1,
 	2,
+	-1,
+	3,
 	-2,
-	3
 }
+
+BADBOY_DEBUG_MIN = 10
+BADBOY_DEBUG_MAX = 10
 
 local strfind = string.find
 t.is = function(msg)
 	local a = 0
 	local matches = {}
-	for i = 1, 6 do
-		for j=1, #t[i] do
+	for i, filter in ipairs(t) do
+		for j=1, #filter do
 			if strfind(msg, t[i][j]) then
 				matches[t[i][j]] = scores[i]
-				a = i>5 and a+3 or i>4 and a-1 or i>3 and a+2 or i>2 and a+1 or a+10
+				a = a + scores[i]
 			end
 		end
 	end
-	if BADBOY_DEBUG and a > 0 and a < 3 then
+	if a > BADBOY_DEBUG_MIN and a <= BADBOY_DEBUG_MAX then
 		matches["TOTAL"] = a
 		DevTools_Dump({
 			[msg] = matches
