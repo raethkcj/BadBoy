@@ -135,7 +135,7 @@ local eventFunc = function(_, event, msg, player, _, _, _, flag, channelId, _, _
 		end
 		if not BADBOY_BLACKLIST[guid] and not IsEncounterInProgress() then
 			local loc = PlayerLocation:CreateFromChatLineID(lineId)
-			spamCollector[guid] = loc
+			BADBOY_BLACKLIST[guid] = true
 			if BADBOY_OPTIONS.tipSpam then
 				spamLogger[guid] = debug
 				if btn:IsShown() and reportFrame:IsMouseOver() then
@@ -273,15 +273,6 @@ do
 				local go, pass = xpcall(CanReportPlayer, dummy, v)
 				if go and pass then
 					BADBOY_BLACKLIST[k] = true
-					local reportInfo = ReportInfo:CreateReportInfoFromType(Enum.ReportType.Chat)
-					reportInfo:SetReportMajorCategory(Enum.ReportMajorCategory.InappropriateCommunication)
-					reportInfo:SetComment("Advertising loot or boosting outside of Trade chat")
-
-					ReportFrame:SetMajorType(Enum.ReportMajorCategory.InappropriateCommunication);
-					ReportFrame:SetMinorCategoryFlag(Enum.ReportMinorCategory.Spam, true);
-
-					local playerName = GetName(v)
-					ReportFrame:InitiateReport(reportInfo, playerName, v, false, true)
 				end
 				spamCollector[k] = nil
 				spamLogger[k] = nil
